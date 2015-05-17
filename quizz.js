@@ -31,7 +31,10 @@ function isCorrect(answer) {
 function updateCorrect(answer) {
     if(isCorrect(answer)) {
        correct++;
+    } else {
+        $("li:nth-child("+(answer+1)+")").addClass("wrong");   
     }
+    $("li:nth-child("+(questions[currentQuestion].answer+1)+")").addClass("correct");
 }
 
 function displayResult() {
@@ -52,7 +55,7 @@ function next() {
 $("#question").on("click", "li", function(event) {
 		updateCorrect(+$(this).data("answer"));
 		currentQuestion++;
-		next();
+		setTimeout(next, 500);
 });
 
 $(function() {

@@ -50,13 +50,15 @@ function next() {
     } else {
         createQuestion();   
     }
+    $("#question").on("click", "li", choiceClicked);
 }
-        
-$("#question").on("click", "li", function(event) {
-		updateCorrect(+$(this).data("answer"));
-		currentQuestion++;
-		setTimeout(next, 500);
-});
+
+function choiceClicked() {
+    $("#question").off("click", "li", choiceClicked);
+    updateCorrect(+$(this).data("answer"));
+    currentQuestion++;
+    setTimeout(next, 500);
+}
 
 $(function() {
 	$("#start").on("click", function() {

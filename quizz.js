@@ -2,16 +2,6 @@ var correct = 0;
 var currentQuestion = 0;
 var questions = [];
 
-function Question(question, choices, answer) {
-	this.question = question;
-	this.choices = choices;
-	this.answer = answer;
-}
-
-questions.push(new Question("Who ?", ["A", "B", "C", "D"], 2));
-questions.push(new Question("Where ?", ["A", "B", "C", "D"], 1));
-questions.push(new Question("When ?", ["A", "B", "C", "D"], 3));
-
 function createQuestion() {
 	var question = questions[currentQuestion];
 	$("#question").find("p").text(question.question);
@@ -62,7 +52,10 @@ function choiceClicked() {
 
 $(function() {
 	$("#start").on("click", function() {
-		$(this).remove();
-		next();
+        $.getJSON("questions/questions.json", function(data) {
+            questions = data;
+            next();
+        });
+        $(this).remove();
 	});
 });
